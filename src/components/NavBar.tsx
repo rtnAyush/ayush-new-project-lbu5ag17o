@@ -17,7 +17,7 @@ const NavBar = () => {
     setIsClient(true);
   }, []);
 
-  const isDashboard = isClient && pathname === '/dashboard';
+  const isDashboard = isClient && pathname.includes('/dashboard');
 
   return (
     <header className="sticky top-0 z-50 w-full bg-muted py-3 shadow-lg">
