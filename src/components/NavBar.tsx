@@ -24,7 +24,7 @@ const NavBar = () => {
       <div className="container mx-auto flex items-center justify-start px-4 md:px-6">
         <Link href="#" className="flex items-center mr-8" prefetch={false}>
           <BluetoothIcon className="h-6 w-6 text-muted-foreground" />
-          <span className="ml-2 text-lg font-bold text-muted-foreground">Acme Inc</span>
+          <span className="ml-2 text-lg font-bold text-muted-foreground">My Inc</span>
         </Link>
         {isClient && (
           <>
