@@ -60,9 +60,9 @@ const NavBar = () => {
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                      <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
+                      <Link  href={"/"}>
                         Logout
-                      </Button>
+                      </Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
