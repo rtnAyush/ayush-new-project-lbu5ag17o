@@ -8,12 +8,13 @@
   "scripts": {
     "dev": "next dev",
     "docker:up": "docker-compose up -d && sleep 60",
-    "db:init": "prisma db pull && prisma generate",
+    "db:init": "env-cmd -f .env prisma db pull --schema ./prisma/schema.prisma && prisma generate",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "docker:down": "docker-compose down",
-    "exec-sql": "docker cp prisma/db.sql project-postgresql:/db.sql && docker exec project-postgresql psql -U root -d $DB_NAME -f /db.sql"
+    "exec-db": "docker exec project-postgresql psql -U root -d postgres -c \"CREATE DATABASE $DB_NAME;\"",
+    "exec-sql": "pnpm run exec-db && cp prisma/db.sql project-postgresql:/tmp/db.sql && docker exec project-postgresql psql -U root -d $DB_NAME -f /tmp/db.sql"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -59,6 +60,7 @@
     "cmdk": "1.0.0",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.2.0",
+    "env-cmd": "^10.1.0",
     "input-otp": "^1.2.4",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.428.0",
