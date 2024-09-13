@@ -14,7 +14,7 @@
     "lint": "next lint",
     "docker:down": "docker-compose down",
     "exec-db": "docker exec project-postgresql psql -U root -d postgres -c \"CREATE DATABASE $DB_NAME;\"",
-    "exec-sql": "pnpm run exec-db && cp prisma/db.sql project-postgresql:/tmp/db.sql && docker exec project-postgresql psql -U root -d $DB_NAME -f /tmp/db.sql"
+    "exec-sql": "pnpm run exec-db && cp prisma/db.sql project-postgresql:db.sql && docker exec project-postgresql psql -U root -d $DB_NAME -f db.sql"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
