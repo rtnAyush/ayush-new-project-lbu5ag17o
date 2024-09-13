@@ -12,7 +12,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "docker:down": "docker-compose down"
+    "docker:down": "docker-compose down",
+    "exec-sql": "docker cp prisma/db.sql project-postgresql:/db.sql && docker exec -it project-postgresql psql -U root -d $DB_NAME -f /db.sql"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
