@@ -7,13 +7,13 @@ type SignupRequestBody = {
   email: string
   password: string
   role?: string,
-  fullName?: string
+  name?: string
 }
 
 export async function POST(request: Request) {
   try {
     const body: SignupRequestBody = await request.json()
-    const { email, password, role, fullName } = body
+    const { email, password, role, name } = body
 
     if (!email || !password) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 })
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     const user = await prisma.users.create({
       data: {
         email,
-        name: fullName || 'Albert',
+        name: name || 'Albert',
         password: hashedPassword,
         role: role || 'user',
       },
