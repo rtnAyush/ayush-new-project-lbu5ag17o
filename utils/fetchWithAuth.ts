@@ -10,10 +10,10 @@ export async function fetchWithAuth(url: string, options: any) {
     if (typeof window === 'undefined') {
       // Server-side: get token from cookies
       const cookieStore = cookies();
-      token = cookieStore.get('token')?.value;
+      token = cookieStore.get('accesstoken')?.value;
     } else {
       // Client-side: get token from localStorage
-      token = localStorage.getItem('token') || undefined;
+      token = localStorage.getItem('accesstoken') || undefined;
     }
   } catch (error) {
     console.error('Error accessing token:', error);

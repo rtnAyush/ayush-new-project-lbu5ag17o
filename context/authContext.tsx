@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    const savedToken = localStorage.getItem('token');
+    const savedToken = localStorage.getItem('accesstoken');
     const authUser = localStorage.getItem('authUser');
 
     if (savedToken) {
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = (newToken: string, authUser: any) => {
-    localStorage.setItem('token', newToken);
+    localStorage.setItem('accesstoken', newToken);
     localStorage.setItem('authUser', JSON.stringify(authUser));
     document.cookie = `token=${newToken}; path=/; max-age=3600; SameSite=Strict`;
     setToken(newToken);
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('accesstoken');
     localStorage.removeItem('authUser');
     setToken(null);
     setAuthUser(null);
