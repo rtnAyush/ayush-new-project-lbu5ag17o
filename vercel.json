@@ -1,0 +1,9 @@
+{
+    "build": {
+      "env": {
+        "DATABASE_URL": "postgresql://root:root@localhost:5432/mydb?schema=public"
+      }
+    },
+    "postbuild": "npx prisma generate && npx prisma migrate deploy"
+  }
+  
