@@ -29,8 +29,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setToken(savedToken);
     }
 
-    if (authUser) {
-      setAuthUser(JSON.parse(authUser));
+    if (authUser || authUser !== "undefined") {
+      setAuthUser(JSON.parse(authUser || '{}'));
     }
 
     setLoading(false);
