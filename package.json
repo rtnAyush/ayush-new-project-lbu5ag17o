@@ -10,7 +10,7 @@
     "docker:up": "docker-compose up -d && sleep 60",
     "db:init": "env-cmd -f .env prisma db pull --schema ./prisma/schema.prisma && prisma generate",
     "build": "next build",
-    "start": "next start",
+    "start": "prisma generate && prisma db push && next build",
     "lint": "next lint",
     "docker:down": "docker-compose down",
     "exec-db": "docker exec project-postgresql psql -U root -d postgres -c \"CREATE DATABASE $DB_NAME;\"",
