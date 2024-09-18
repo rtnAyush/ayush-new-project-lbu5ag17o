@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 type SignupRequestBody = {
@@ -25,23 +24,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'User with this email already exists' }, { status: 400 })
     }
 
-    // Hash the password
-    const saltRounds = 10
-    const hashedPassword = await bcrypt.hash(password, saltRounds)
-
     // Create the new user
     const user = await prisma.users.create({
       data: {
         email,
+        username: email?.split("@")[0] || name,
         name: name || 'Albert',
-        password: hashedPassword,
+        password: password,
         role: role || 'user',
       },
     })
 
     // Generate a JWT token
     const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, username: user.username },
         process.env.JWT_SECRET || 'secret',
         { expiresIn: '1h' } // Token expires in 1 hour
       )

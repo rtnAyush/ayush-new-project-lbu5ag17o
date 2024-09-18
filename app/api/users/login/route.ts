@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
-import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 type LoginRequestBody = {
@@ -25,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     // Compare the provided password with the stored hash
-    const isPasswordValid = await bcrypt.compare(password, user.password)
+    const isPasswordValid = user.password == password;
     
     if (!isPasswordValid) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 })
