@@ -7,8 +7,10 @@ import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
 import { BluetoothIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from 'next/navigation';
+import { useAuth } from "@/context/authContext";
 
 const NavBar = () => {
+  const { logout } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -60,7 +62,7 @@ const NavBar = () => {
                     <DropdownMenuItem>Settings</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>
-                      <Link  href={"/"}>
+                      <Link  href={"/"} onClick={() => logout()}>
                         Logout
                       </Link>
                     </DropdownMenuItem>
