@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "docker:up": "docker-compose up -d && sleep 60",
-    "db:init": "env-cmd -f .env prisma db pull --schema ./prisma/schema.prisma && prisma generate",
+    "db:init": "env-cmd -f .env prisma generate && prisma db push --schema ./prisma/schema.prisma",
     "build": "prisma generate && prisma db push && next build",
     "start": " next start",
     "lint": "next lint",
