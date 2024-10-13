@@ -110,4 +110,4 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({ date, setDate }) => {
   )
 }
 
-export default DateTimePicker
+export { DateTimePicker }
