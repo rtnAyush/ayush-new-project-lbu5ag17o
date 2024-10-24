@@ -9,7 +9,7 @@
     "dev": "next dev",
     "docker:up": "docker-compose up -d && sleep 60",
     "db:init": "env-cmd -f .env npx prisma generate && prisma db push --schema ./prisma/schema.prisma",
-    "build:dev": "npx prisma generate && next build",
+    "build:dev": "npx prisma generate && tsc --noEmit",
     "build": "npx prisma generate && prisma db push --schema ./prisma/schema.prisma && next build",
     "start": " next start",
     "lint": "next lint",
