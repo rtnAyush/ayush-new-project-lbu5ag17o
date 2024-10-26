@@ -20,8 +20,6 @@ export async function POST(req: NextRequest) {
           email,
           name,
           username: email.split("@")[0],
-          role: "user",
-          password: "",
         },
       });
     }
