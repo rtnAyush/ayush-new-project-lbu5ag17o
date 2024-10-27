@@ -12,8 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "next/navigation";
-import { LoaderCircleIcon } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { Loader2, LoaderCircleIcon } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
 import { toast } from "sonner";
 import axios, { isAxiosError } from "axios";
 
@@ -23,6 +23,8 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const { data: session } = useSession();
   const router = useRouter();
 
   const signUpUser = async (e: React.FormEvent) => {
@@ -141,6 +143,22 @@ const SignupPage = () => {
             ) : (
               "Sign up"
             )}
+          </Button>
+          <Button
+            disabled={googleLoading}
+            variant="outline"
+            className="w-full"
+            onClick={async () => {
+              setGoogleLoading(true);
+              await signIn("google");
+              setTimeout(() => {
+                router.push(`/dashboard/${session?.user?.role}`);
+                setGoogleLoading(false);
+              }, 1000);
+            }}
+          >
+            {googleLoading && <Loader2 className="animate-spin mr-2" />} Sign in
+            with Google
           </Button>
         </form>
       </div>
