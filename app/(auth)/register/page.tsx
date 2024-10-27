@@ -52,11 +52,7 @@ const SignupPage = () => {
         toast.error(result?.error ?? "An error occurred");
       }
       setLoading(false);
-      if (role) {
-        router?.push(`/dashboard/${role}`);
-      } else {
-        router?.push("/dashboard/user");
-      }
+      router?.push(`/dashboard`);
     } catch (err: any) {
       if (isAxiosError(err)) {
         toast.error(err.response?.data.message ?? "An error occurred");
@@ -150,11 +146,10 @@ const SignupPage = () => {
             className="w-full"
             onClick={async () => {
               setGoogleLoading(true);
-              await signIn("google");
-              setTimeout(() => {
-                router.push(`/dashboard/${session?.user?.role}`);
-                setGoogleLoading(false);
-              }, 1000);
+              await signIn("google", {
+                callbackUrl: `/dashboard`,
+              });
+              setGoogleLoading(false);
             }}
           >
             {googleLoading && <Loader2 className="animate-spin mr-2" />} Sign in

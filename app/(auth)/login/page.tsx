@@ -102,11 +102,10 @@ const LoginPage = () => {
             className="w-full"
             onClick={async () => {
               setGoogleLoading(true);
-              await signIn("google");
-              setTimeout(() => {
-                router.push(`/dashboard/${session?.user?.role}`);
-                setGoogleLoading(false);
-              }, 1000);
+              await signIn("google", {
+                callbackUrl: `/dashboard`,
+              });
+              setGoogleLoading(false);
             }}
           >
             {googleLoading && <Loader2 className="animate-spin mr-2" />} Sign in
