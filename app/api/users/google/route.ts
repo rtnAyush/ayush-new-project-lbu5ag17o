@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 const SECRET_KEY = process.env.JWT_SECRET || "your_secret_key"; // Use a strong secret
 
 export async function POST(req: NextRequest) {
-  const { email, name, picture } = await req.json(); // Assuming you receive email, name, and picture from Google
+  const { email, name } = await req.json();
 
   try {
     // Check if the user already exists
@@ -30,7 +30,6 @@ export async function POST(req: NextRequest) {
         id: user.id,
         username: user.username,
         email: user.email,
-        name: user.name,
         role: user.role,
       },
       SECRET_KEY,

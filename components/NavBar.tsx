@@ -10,8 +10,8 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "./ui/avatar";
-import { BluetoothIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { BluetoothIcon, User } from "lucide-react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
@@ -27,44 +27,33 @@ const NavBar = () => {
   const isDashboard = isClient && pathname.includes("/dashboard");
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-muted/80 backdrop-blur-md py-3 ">
-      <div className="container mx-auto flex items-center justify-start px-4 md:px-6">
+    <header className="sticky top-0 z-50 w-full border-b bg-background">
+      <div className="container flex h-14 items-center">
         <Link
-          href={isDashboard ? "" : "/"}
-          className="flex items-center mr-8"
+          href={isDashboard ? "/dashboard" : "/"}
+          className="flex items-center space-x-2 mr-4"
           prefetch={false}
         >
-          <BluetoothIcon className="h-6 w-6 text-muted-foreground" />
-          <span className="ml-2 text-lg font-bold text-muted-foreground">
-            My Inc
-          </span>
+          <BluetoothIcon className="h-6 w-6" />
+          <span className="font-bold">My Inc</span>
         </Link>
+
         {isClient && (
           <>
             {!isDashboard && (
-              <nav className="hidden md:flex flex-1 justify-end">
-                <ul className="flex items-center space-x-6">
-                  <li>
-                    <Button
-                      variant={"outline"}
-                      onClick={() => router?.push("/login")}
-                    >
-                      Login
-                    </Button>
-                  </li>
-                  <li>
-                    <Button
-                      variant={"outline"}
-                      onClick={() => router?.push("/register")}
-                    >
-                      Sign Up
-                    </Button>
-                  </li>
-                </ul>
-              </nav>
+              <>
+                <nav className="flex-1 flex items-center justify-end space-x-4 md:space-x-6">
+                  <Button asChild variant="ghost">
+                    <Link href={"/login"}>Login</Link>
+                  </Button>
+                  <Button asChild>
+                    <Link href={"/register"}>Sign Up</Link>
+                  </Button>
+                </nav>
+              </>
             )}
             {isDashboard && (
-              <div className="flex items-center space-x-4 ml-auto">
+              <div className="flex-1 flex items-center justify-end">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -77,21 +66,24 @@ const NavBar = () => {
                           src="https://github.com/shadcn.png"
                           alt="User Avatar"
                         />
-                        <AvatarFallback>JD</AvatarFallback>
+                        <AvatarFallback>
+                          <User className="h-4 w-4" />
+                        </AvatarFallback>
                       </Avatar>
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => router.push("/profile")}>
+                      Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onSelect={() => router.push("/settings")}>
+                      Settings
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>
-                      <Link
-                        href={"/"}
-                        onClick={() => signOut({ callbackUrl: "/login" })}
-                      >
-                        Logout
-                      </Link>
+                    <DropdownMenuItem
+                      onSelect={() => signOut({ callbackUrl: "/login" })}
+                    >
+                      Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
