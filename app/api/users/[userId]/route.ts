@@ -14,7 +14,7 @@ export async function PUT(req: Request) {
 
     // Assume you're using Prisma or another ORM to update the user's profile in the DB
     const updatedUser = await prisma.user.update({
-      where: { id },
+      where: { userId: id },
       data: { name },
     });
 
