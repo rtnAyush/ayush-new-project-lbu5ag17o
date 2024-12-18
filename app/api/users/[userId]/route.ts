@@ -4,7 +4,7 @@ import prisma from "@/lib/prisma"; //
 // Update user profile (PUT request)
 export async function PUT(
   req: Request,
-  { params }: { params: { userId: number } }
+  { params }: { params: { userId: any } }
 ) {
   try {
     const body = await req.json();
@@ -38,7 +38,7 @@ export async function PUT(
 }
 export async function DELETE(
   req: Request,
-  { params }: { params: { userId: number } }
+  { params }: { params: { userId: any } }
 ) {
   try {
     if (!params.userId) {
