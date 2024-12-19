@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { StripeCheckout, StripePaymentIntent } from "../services";
+import { StripeCheckout, StripePaymentIntent } from "./services";
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
