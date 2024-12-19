@@ -1,5 +1,5 @@
 import Razorpay from "razorpay";
-import { RazorpayCheckout } from "./service";
+import { RazorpayCheckout } from "./services";
 
 export const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID!,
