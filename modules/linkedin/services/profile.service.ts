@@ -2,7 +2,7 @@ import { unipileClient } from "..";
 import { UNIPILE_BASE_URL } from "..";
 
 export class ProfileService {
-    static async connectLinkedinAaccount(
+    static async connectLinkedinAccount(
         uniqueIdentifier?: string,
         successRedirectUrl?: string,
         failureRedirectUrl?: string,
@@ -18,7 +18,7 @@ export class ProfileService {
             success_redirect_url: successRedirectUrl || undefined,
             failure_redirect_url: failureRedirectUrl || undefined,
         });
-        return response;
+        return response as any;
     }
 
     static async getBasicUserProfile(accountId: string, linkedinIdentifier: string) {
@@ -26,7 +26,7 @@ export class ProfileService {
             account_id: accountId,
             identifier: linkedinIdentifier,
         });
-        return response;
+        return response as any;
     }
 
     static async getCompleteUserProfile(accountId: string, linkedinIdentifier: string) {
@@ -35,7 +35,7 @@ export class ProfileService {
             identifier: linkedinIdentifier,
             linkedin_sections: "*",
         });
-        return response;
+        return response as any;
     }
 
     static async getUserWorkExperience(accountId: string, linkedinIdentifier: string) {
@@ -44,7 +44,7 @@ export class ProfileService {
             identifier: linkedinIdentifier,
             linkedin_sections: "experience",
         });
-        return response;
+        return response as any;
     }
 
     static async getUserEducation(accountId: string, linkedinIdentifier: string) {
@@ -62,6 +62,6 @@ export class ProfileService {
             identifier: linkedinIdentifier,
             linkedin_sections: "skills",
         });
-        return response;
+        return response as any;
     }
 }

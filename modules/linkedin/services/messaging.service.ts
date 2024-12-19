@@ -11,7 +11,7 @@ export class MessagingService {
             text: message,
             account_id: accountId,
         });
-        return response;
+        return response as any;
     }
 
     static async sendBulkMessage(accountId: string, linkedinIdentifiers: string[], message: string) {
@@ -27,6 +27,6 @@ export class MessagingService {
             text: message,
             account_id: accountId,
         });
-        return response;
+        return response as any;
     }
 }

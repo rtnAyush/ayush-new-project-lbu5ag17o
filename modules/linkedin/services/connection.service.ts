@@ -10,7 +10,7 @@ export class ConnectionService {
             account_id: accountId,
             provider_id: providerId,
         });
-        return response;
+        return response as any;
     }
 
     static async getConnectionStatus(accountId: string, linkedinIdentifier: string) {
@@ -19,7 +19,7 @@ export class ConnectionService {
             identifier: linkedinIdentifier,
         });
         const networkDistance = resp.network_distance as string;
-        return networkDistance;
+        return networkDistance as any;
     }
 
     static async withdrawConnectionRequest(accountId: string, invitationId: string) {
@@ -27,6 +27,6 @@ export class ConnectionService {
             account_id: accountId,
             invitation_id: invitationId,
         });
-        return response;
+        return response as any;
     }
 }
