@@ -1,10 +1,10 @@
-import { AzureOpenAI, OpenAI } from 'openai';
-import * as dotenv from 'dotenv';
+import { AzureOpenAI, OpenAI } from "openai";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
-type ServiceProvider = 'openai' | 'azure';
-type ResponseFormat = 'string' | 'json';
+type ServiceProvider = "openai" | "azure";
+type ResponseFormat = "string" | "json";
 
 interface TokenUsage {
   total_tokens: number;
@@ -54,28 +54,30 @@ export class OpenAIWrapper {
   private readonly serviceProvider: ServiceProvider;
 
   constructor(config: OpenAIWrapperConfig = {}) {
-    const {
-      apiKey = process.env.OPENAI_API_KEY,
-      serviceProvider = 'openai',
-      maxRetries = 3,
-    } = config;
-
-    if (!apiKey) {
-      throw new Error(
-        'API key is required. Set it in environment or pass explicitly.',
-      );
-    }
+    const { serviceProvider = "azure", maxRetries = 3 } = config;
 
     this.maxRetries = maxRetries;
     this.serviceProvider = serviceProvider;
 
-    if (serviceProvider === 'openai') {
+    if (serviceProvider === "openai") {
+      const apiKey = process.env.OPENAI_API_KEY;
+
+      if (!apiKey) {
+        throw new Error("OPENAPI key is required. Set it in environment");
+      }
+
       this.client = new OpenAI({ apiKey });
-    } else if (serviceProvider === 'azure') {
+    } else if (serviceProvider === "azure") {
+      const apiKey = process.env.AZURE_OPENAI_API_KEY;
+
+      if (!apiKey) {
+        throw new Error("AZURE OPENAI key is required. Set it in environment");
+      }
+
       this.client = new AzureOpenAI({
-        apiKey,
-        endpoint: process.env.AZURE_OPENAI_API_BASE || '',
-        deployment: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || '',
+        apiKey: apiKey || "",
+        endpoint: process.env.AZURE_OPENAI_ENDPOINT || "",
+        deployment: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || "",
       });
     } else {
       throw new Error("Invalid service provider. Choose 'openai' or 'azure'.");
@@ -114,10 +116,10 @@ export class OpenAIWrapper {
     } = {},
   ): Promise<OpenAIResponseData> {
     const {
-      model = 'gpt-4o-mini',
+      model = "gpt-4o-mini",
       maxTokens = 1000,
       temperature = 0.7,
-      outputFormat = 'string',
+      outputFormat = "string",
     } = options;
 
     let retryCount = 0;
@@ -125,8 +127,8 @@ export class OpenAIWrapper {
       try {
         const response = await this.retryApiCall(async () => {
           const messages: any = [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: userPrompt },
+            { role: "system", content: systemPrompt },
+            { role: "user", content: userPrompt },
           ];
 
           return await this.client.chat.completions.create({
@@ -135,14 +137,14 @@ export class OpenAIWrapper {
             max_tokens: maxTokens,
             temperature,
             response_format:
-              outputFormat === 'json' ? { type: 'json_object' } : undefined,
+              outputFormat === "json" ? { type: "json_object" } : undefined,
           });
         });
 
-        let content = response.choices[0].message.content || '';
+        let content = response.choices[0].message.content || "";
 
-        if (outputFormat === 'json') {
-          content = content.replace(/```json\n?|\n?```/g, '').trim();
+        if (outputFormat === "json") {
+          content = content.replace(/```json\n?|\n?```/g, "").trim();
           try {
             content = JSON.parse(content);
           } catch (error) {
@@ -182,6 +184,6 @@ export class OpenAIWrapper {
       }
     }
 
-    throw new Error('Failed to generate response');
+    throw new Error("Failed to generate response");
   }
 }
