@@ -78,6 +78,7 @@ export class OpenAIWrapper {
         apiKey: apiKey || "",
         endpoint: process.env.AZURE_OPENAI_ENDPOINT || "",
         deployment: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || "",
+        apiVersion: process.env.AZURE_OPENAI_API_VERSION || "",
       });
     } else {
       throw new Error("Invalid service provider. Choose 'openai' or 'azure'.");
