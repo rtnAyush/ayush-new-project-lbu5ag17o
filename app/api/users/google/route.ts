@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 const SECRET_KEY = process.env.JWT_SECRET || "your_secret_key"; // Use a strong secret
 
 export async function POST(req: NextRequest) {
-  const { email, name } = await req.json();
+  const { email } = await req.json();
 
   try {
     // Check if the user already exists
@@ -18,8 +18,7 @@ export async function POST(req: NextRequest) {
       user = await prisma.user.create({
         data: {
           email,
-          name,
-          username: email.split("@")[0],
+          password: "default_password", // Assuming a default password or handle password creation
         },
       });
     }
@@ -28,9 +27,7 @@ export async function POST(req: NextRequest) {
     const token = jwt.sign(
       {
         id: user.id,
-        username: user.username,
         email: user.email,
-        role: user.role,
       },
       SECRET_KEY,
       { expiresIn: "10d" } // Token expiration

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import prisma from "@/lib/prisma"; //
+import prisma from "@/lib/prisma";
 
 // Update user profile (PUT request)
 export async function PUT(
@@ -9,19 +9,19 @@ export async function PUT(
   try {
     const body = await req.json();
 
-    const { name } = body;
+    const { email, password } = body;
 
-    if (!name || !params.userId) {
+    if (!email || !password || !params?.userId) {
       return NextResponse.json(
         { message: "Missing required fields", success: false },
         { status: 400 }
       );
     }
 
-    // Assume you're using Prisma or another ORM to update the user's profile in the DB
+    // Update the user's profile in the DB
     const updatedUser = await prisma.user.update({
       where: { id: params.userId },
-      data: { name },
+      data: { email, password },
     });
 
     return NextResponse.json({
@@ -36,19 +36,20 @@ export async function PUT(
     );
   }
 }
+
 export async function DELETE(
   req: Request,
   { params }: { params: { userId: any } }
 ) {
   try {
-    if (!params.userId) {
+    if (!params?.userId) {
       return NextResponse.json(
         { message: "Missing required fields", success: false },
         { status: 400 }
       );
     }
 
-    // Assume you're using Prisma or another ORM to delete the user from the DB
+    // Delete the user from the DB
     await prisma.user.delete({
       where: { id: params.userId },
     });

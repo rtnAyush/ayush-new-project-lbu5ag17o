@@ -37,10 +37,7 @@ export async function POST(request: Request) {
     const user = await prisma.user.create({
       data: {
         email,
-        username: email?.split("@")[0],
-        name: name || "Albert",
         password: hashedPassword,
-        role: (role || "user") as any,
       },
     });
 
@@ -49,8 +46,6 @@ export async function POST(request: Request) {
       {
         id: user.id,
         email: user.email,
-        username: user.username,
-        role: user.role,
       },
       process.env.JWT_SECRET || "secret",
       { expiresIn: "10d" } // Token expires in 10 days
@@ -58,7 +53,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        message: "sugnup successful",
+        message: "signup successful",
         success: true,
         data: { token: token, user: user },
       },

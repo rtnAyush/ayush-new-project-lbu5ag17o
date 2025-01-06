@@ -1,215 +1,210 @@
-"use client";
+'use client' ;
+
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import {
-  Mail,
-  User,
-  BookOpen,
-  VideoIcon,
-  DollarSign,
-  ArrowRight,
-} from "lucide-react";
-import Image from "next/image";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Check, ArrowRight, User } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { TooltipProvider, Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-[100dvh]">
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12">
+          <div className="container px-4 md:px-6">
+            <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
-                  <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl">
-                    Revolutionize Your Learning Experience
+                  <h1 className="text-4xl font-extrabold tracking-tighter sm:text-6xl xl:text-7xl/none">
+                    Simplify Your Tasks with Our Todo App
                   </h1>
-                  <p className="max-w-xl md:text-xl">
-                    Our platform brings tutors and students together for an
-                    interactive and immersive educational journey.
+                  <p className="max-w-[600px] md:text-xl">
+                    Organize your life effortlessly with our intuitive and powerful todo application.
                   </p>
                 </div>
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <Button className="bg-white text-blue-600 hover:bg-gray-200">
+                <div className="flex flex-col gap-2 min-[400px]:flex-row">
+                  <Button className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
                     Get Started
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="text-white border-white hover:bg-white hover:text-blue-600"
-                  >
+                  <Button className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
                     Learn More
                   </Button>
                 </div>
               </div>
-              <Image
-                src="https://picsum.photos/seed/picsum/200/300"
-                alt="Learning"
-                width={400}
-                height={600}
-                className="mx-auto w-full rounded-xl lg:order-last"
+              <img
+                src="https://placehold.co/600x400.png"
+                width="550"
+                height="550"
+                alt="Hero"
+                className="mx-auto aspect-video overflow-hidden rounded-xl object-bottom sm:w-full lg:order-last lg:aspect-square"
               />
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Core Features
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Explore the powerful features designed to enhance the
-                educational experience for both tutors and students.
-              </p>
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Features</h2>
+                <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Discover the powerful features that make our todo app the best choice for managing your tasks.
+                </p>
+              </div>
             </div>
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 py-12">
-              <Card>
+            <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
+              <Card className="flex flex-col items-center justify-center space-y-4">
+                <User className="h-12 w-12" />
                 <CardHeader>
-                  <User className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>User Authentication</CardTitle>
-                  <CardDescription>
-                    Email and Password Login/Signup
-                  </CardDescription>
+                  <CardTitle className="text-lg font-bold">User-Friendly Interface</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>
-                    Secure accounts for students and tutors with essential login
-                    and signup capabilities.
+                  <p className="text-muted-foreground">
+                    Navigate through your tasks with an intuitive and clean interface.
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="flex flex-col items-center justify-center space-y-4">
+                <Check className="h-12 w-12" />
                 <CardHeader>
-                  <BookOpen className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Course Management</CardTitle>
-                  <CardDescription>Create and View Courses</CardDescription>
+                  <CardTitle className="text-lg font-bold">Efficient Task Management</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>
-                    Tutors can create and manage their courses with flexible
-                    scheduling and detailed descriptions.
+                  <p className="text-muted-foreground">
+                    Organize, prioritize, and track your tasks with ease.
                   </p>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="flex flex-col items-center justify-center space-y-4">
+                <ArrowRight className="h-12 w-12" />
                 <CardHeader>
-                  <VideoIcon className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Zoom Link Access</CardTitle>
-                  <CardDescription>Controlled Access</CardDescription>
+                  <CardTitle className="text-lg font-bold">Seamless Integration</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>
-                    Secure Zoom access ensures only enrolled students can join
-                    the class sessions.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <DollarSign className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Payment Processing</CardTitle>
-                  <CardDescription>Secure Transactions</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    Integrated payment solutions ensure seamless and secure
-                    transactions for course enrollments.
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader>
-                  <User className="h-12 w-12 mx-auto text-blue-600" />
-                  <CardTitle>Student Dashboard</CardTitle>
-                  <CardDescription>Enrolled Courses Overview</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p>
-                    A personalized dashboard for students to monitor and access
-                    their enrolled courses easily.
+                  <p className="text-muted-foreground">
+                    Integrate with your favorite tools for a seamless workflow.
                   </p>
                 </CardContent>
               </Card>
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
+          <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Frequently Asked Questions
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Find answers to common questions and learn more about our
-                platform’s capabilities.
-              </p>
-            </div>
-            <div className="mx-auto max-w-3xl py-12">
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">FAQs</h2>
+                <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Have questions? We've got answers.
+                </p>
+              </div>
               <Accordion type="single" collapsible>
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    How do I sign up as a tutor?
-                  </AccordionTrigger>
+                  <AccordionTrigger>How do I create a new task?</AccordionTrigger>
                   <AccordionContent>
-                    Tutors can sign up using their email and password and start
-                    creating courses immediately.
+                    To create a new task, simply click on the "Add Task" button and fill in the details.
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>
-                    How can students enroll in courses?
-                  </AccordionTrigger>
+                  <AccordionTrigger>Can I prioritize my tasks?</AccordionTrigger>
                   <AccordionContent>
-                    Students can browse available courses and enroll by
-                    proceeding to the payment page.
-                  </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-3">
-                  <AccordionTrigger>
-                    What payment methods are supported?
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    We support various payment methods to ensure a smooth
-                    enrollment experience for all users.
+                    Yes, you can prioritize your tasks by assigning them different levels of importance.
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
             </div>
           </div>
         </section>
-
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                Join Us Today
-              </h2>
-              <p className="max-w-xl md:text-lg">
-                Begin your journey with our innovative learning management
-                platform. Sign up now and explore endless learning
-                possibilities!
-              </p>
-              <Button className="bg-blue-600 text-white hover:bg-blue-700 px-6 py-3 text-lg">
-                Sign Up Now
-              </Button>
+              <div className="space-y-2">
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Testimonials</h2>
+                <p className="max-w-[900px] md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                  Hear from our satisfied users.
+                </p>
+              </div>
+              <div className="grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+                <Card className="flex flex-col items-start space-y-4 p-6">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="https://placehold.co/100x100.png" />
+                      <AvatarFallback>JD</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium leading-none">John Doe</p>
+                      <p className="text-xs text-muted-foreground">Product Manager</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "This todo app has transformed the way I manage my tasks. It's incredibly easy to use!"
+                  </p>
+                </Card>
+                <Card className="flex flex-col items-start space-y-4 p-6">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="https://placehold.co/100x100.png" />
+                      <AvatarFallback>SM</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium leading-none">Sarah Miller</p>
+                      <p className="text-xs text-muted-foreground">Software Engineer</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "I can't imagine going back to my old system. This app is a game-changer!"
+                  </p>
+                </Card>
+                <Card className="flex flex-col items-start space-y-4 p-6">
+                  <div className="flex items-center gap-4">
+                    <Avatar>
+                      <AvatarImage src="https://placehold.co/100x100.png" />
+                      <AvatarFallback>MJ</AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <p className="text-sm font-medium leading-none">Michael Johnson</p>
+                      <p className="text-xs text-muted-foreground">Designer</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground">
+                    "The seamless integration with my tools is fantastic. Highly recommend!"
+                  </p>
+                </Card>
+              </div>
             </div>
           </div>
         </section>
       </main>
+      <footer className="bg-muted p-6 md:py-12 w-full">
+        <div className="container max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-sm">
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Product</h3>
+            <Button variant="link">Features</Button>
+            <Button variant="link">Integrations</Button>
+            <Button variant="link">Pricing</Button>
+            <Button variant="link">Security</Button>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Company</h3>
+            <Button variant="link">About Us</Button>
+            <Button variant="link">Careers</Button>
+            <Button variant="link">Blog</Button>
+            <Button variant="link">Contact</Button>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Resources</h3>
+            <Button variant="link">Documentation</Button>
+            <Button variant="link">Help Center</Button>
+            <Button variant="link">Community</Button>
+            <Button variant="link">Templates</Button>
+          </div>
+          <div className="grid gap-1">
+            <h3 className="font-semibold">Legal</h3>
+            <Button variant="link">Privacy Policy</Button>
+            <Button variant="link">Terms of Service</Button>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
