@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Fetch env file from API
+ENV_CONTENT=$(curl -X POST \
+  "https://tools-backend.dev.opengig.work/development/${REPO}/env" \
+  -H "Content-Type: application/json" \
+  -d "{\"apiKey\": \"ldbrkfioyfsxvxuf\"}")
+
+# Write env content directly to file
+echo "$ENV_CONTENT" > .env
+
 REPO=$(hostname)
 cd "$HOME/$REPO"
 git pull
